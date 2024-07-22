@@ -1,0 +1,10 @@
+thalf_A = 2.53 #hours
+thalf_B = 11.05 #hours
+thalf_C = oo #hours
+
+NA_0 = 100 #number of atoms
+NB_0 = 0 #number of atoms
+NC_0 = 0 #number of atoms
+
+t_final = 60 #hours
+dt = 1 #hours
