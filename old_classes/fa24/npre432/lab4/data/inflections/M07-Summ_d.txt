@@ -1,0 +1,16 @@
+*%Bi	1st transition	2nd transition	3rd transition	Note  0	230			
+  5				
+ 10				
+ 15	207	135		The composition may have been wrong. 
+ 20				
+ 25	192	132		
+ 30				
+ 40	166	131		
+ 50	151	132		
+ 55	139	133		
+ 60				
+ 65	146	136		
+ 70				
+ 80				
+ 90	227	135		
+100				
