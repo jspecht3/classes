@@ -1,16 +1,0 @@
-*%Bi	1st transition	2nd transition	3rd transition	Note  0			
-  5	184	130	
- 10	199	195	177
- 15			
- 20	200	130	
- 25			
- 30	184		
- 40			
- 50			
- 55			
- 60	132		
- 65			
- 70			
- 80	210		
- 90			
-100			
