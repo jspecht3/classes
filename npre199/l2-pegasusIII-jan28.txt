@@ -1,0 +1,46 @@
+Pegasus-III: Solenoid-Free Startup in the Pegasus-III Experiment
+S.J. Diem on January 28, 2025
+
+- got funding to build the Pegasus-III experiment before going to UW-Madison
+- part of the new science branch for the us, advises gov't about advancements in science and technology
+- 20% energy into the alpha particle to reheat the plasma
+- triple product for fusion: density, temperature, time
+- on the order of 100-200 MK
+- methods of fusion: lasers, gravity, magnets
+- NIF reached the ignition point in December 2022
+- charged particles naturally gyrate around magnetic field lines
+- hot plasmas do not give off light unless they are recombining
+- balance between engineering simplicity and difficulty from physics
+- approaches to magnetic fusion
+  - magnetic mirror: very simple
+  - tokamak: torus that has some stabilities as field lines are not perfectly circular
+  - stellerator: design follows the magnetic field lines perferctly
+- challenges for fusion energy
+  - sustain a burning plasma
+  - develop more resistant material
+  - better magnets
+- need external heating to get the plasma up to temperature
+  - neutral beams: shooting a beam of hot particles into the plasma. does not work for large reactors
+  - ohmic heating: resistive heating
+  - RF power: use microwaves or radio-waves to heat the plasma
+- she works on RF power
+- capacitors that store 175 MVA
+- they use plasma injectors
+- magnetic reconnection: getting ripping of magnetic field lines and the particles that were previously trapped in the field have the energy of the field imparted on them
+- plasma wobbles because the stream of plasma rip
+- injectors are very compact
+- w/ injectors, there is a bulk plasma and a periphery of sparsely populated streams
+- looking at if the injectors can fix the instabilities in the plasma
+- temperature peaks at the edges because of impurities
+- also looking at the plasma emission to understand impurities and radiated power
+- US focused on building fusion pilot plant in the 2040s
+- she is most excited about microwave heating
+- main challenges with fusion
+  - superconductors
+  - materials
+  - funding
+  - tritium breeding
+- optimistic timeline ~15 years for first commercial fusion power plant
+- it would cost 2x the GDP to replace all of the generation capacity in the US
+- 100~150 years to get to 20% of the generation capacity
+- to get through the "valley of death," solar had to put in $100B/year and there is not nearly as much funding for fusion

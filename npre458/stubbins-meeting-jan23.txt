@@ -1,0 +1,34 @@
+- problem with the MSRE is that they werent long term
+- they have looked at various removal methods
+- they did work at UIUC about bubbling with He to do load following
+- the other issue is the DNPs having odd reactivties
+- MSRE data is speculative
+- argument about Xe hideout in graphite
+- need to refine the whole thing
+- we are just putting components in a place
+- biggest issue w/ proliferation
+- US requires that you extract U and Pu together
+- check for Thorium and Protactinium policy
+- we just don't want to be the ones that start reprocessing
+- difference in reporcessing is mostly based on cost rn
+- just worrking about the spent fuel later
+- MSRE did not have a very good reactivity
+- could look at designing a pump
+- control of what you are doing in the salt is the most
+- not take as much off the shelf technology
+- savannah river T production reactors had issues with T
+- at what temps can you get to with MSRs, above ~750-800*C is too hot
+- operating ranges of the salts
+
+- watts bar reactor makes T from a fuel cell replacement
+- LANL accelerates protons to 800 MeV and spallates atoms to make T
+- govt said we don't need that much T, we just need to have the threat that we can
+- MIT Charles published papers about molten salt clean-up
+- look at flow rates and processing rates
+- look at if the medical isotopes are worth it
+- MSU has a rare-isotope creation system we can look at for the isotope seperation
+- Stubbins thinks this is going to be very hard to make MSRs work because it is so technologically complex
+- Terrapower is looking at a chloride salt system
+- solar towers use salt for energy storage
+
+- we need to do something more complex than putting components in a flow line

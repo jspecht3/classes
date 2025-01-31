@@ -1,5 +1,6 @@
 .ipynb_checkpoints
-__pychache*
+*__pycache__*
+__pycache__
 old_classes/Fa23/TAM 335/TAM 335_Textbook (2024_05_04 23_09_17 UTC).pdf
 old_classes/Sp24/Sp24 Textbooks/NPRE 451-Landseberger&Tsoulfanidis (2024_05_04 23_09_17 UTC).pdf
 old_classes/Sp24/Sp24 Textbooks/Sp24 (2024_05_04 23_09_17 UTC).zip
