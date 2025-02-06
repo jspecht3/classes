@@ -1,0 +1,69 @@
+The State and Future of Nuclear Power, Policy
+Katy Huff, 3/4/2023
+
+- she was the assistant secretary of nuclear energy
+- ran the office of nuclear energy
+- does modeling for advanced reactors for research
+- nuclear policy is kinda like a supercritical reaction
+  - NEICA, MEIMA
+  - MELA
+  - ARDP
+  - save Diablo Canyon
+  - IIJA, IRA
+  - COP28, multiple countries have dedicated to tripling nuclear by 2050
+  - new nuclear is needed now
+- same thing with nuclear energy social medea
+- and nuclear enery startup
+  - NuScale
+  - Oklo, Tap
+  - dozens of them
+- and nuclear energy activism
+  - nuclear science week
+  - overturn moratoria
+  - save diablo canyon
+  - mascots, art, card game
+  - NGOs, marches, sit-ins
+  - COP, G20, Climate Week, Nuclear Energy Summit
+- number of operating us reactors
+  - 93 when she started at DOE
+  - 94 now
+- total number of nuclear reactors peaked in ~1990 and decreased until 2021
+- us has the most reactors built, most reactors attempted, most reactors operating
+  - china is making a bunch more reactors than us
+  - us thought china had 24 under construction in 2024, but they really had 32
+- trends to look out for to predict nuclear energy increasing
+  - financing appetite
+    - AP1000 is the only nuclear reactor design that has been exported
+    - BofA, Morgan Stanley, and Goldman back nuclear power plants
+  - change in development financing is lagging
+    - world bank yet to back developing nations
+  - three reactor restarts
+    - TMI restarting with a power purchasing agreement from Microsoft
+    - TMI called it the Crane Clean Energy center
+    - What it will take to restart decommissioned US nuclear plants. Huff and Ryan
+  - public opinion of nuclear power plants going up
+    - PEW reports that since 2020, a majority of Americans are in favor of more nuclear going online
+    - ADVANCE act
+  - global carbon emissions are still increasing
+    - only 0.1% growth in 2023
+    - might turn around very soon
+  - energy demand increases
+    - we just want more power
+    - data center companies will need a lot more energy
+  - supply chain costs for clean energy
+    - from the construction analytics, building cost index
+    - construction is getting more expensive, but is kinda volatile
+  - we abandoned a lot of reactors in the us in the 70s-80s
+  - opinions on science
+    - a lot of Americans say scientific investments are worthwhile
+    - over half say it is important for the US to be a leader in nuclear energy
+    - only about half say science has had a positive impact on society
+  - transmission build-out is challenging
+    - only 55 miles of high-voltage lines added in 2023
+    - need millions of miles
+    - lots of nuclear money frozen
+  - reversals and re~reversals in nuclear policy
+    - Donny is sending out orders and then rescinding them
+    - disrupts so much stuff
+    - hard to plan when everything is in disarray
+    - Canada has the best U in the world, so the cost of fuel might jump 25%
