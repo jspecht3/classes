@@ -1,0 +1,259 @@
+%        File: hw06_template.tex
+%     Created: Sat Sep 10 10:00 AM 2016 C
+% Last Change: Sat Sep 10 10:00 AM 2016 C
+%
+
+% use the answers clause to get answers to print; otherwise leave it out.
+\documentclass[11pt,answers,addpoints]{exam}
+%\documentclass[11pt,answers]{exam}
+\RequirePackage{amssymb, amsfonts, amsmath, latexsym, verbatim, xspace, setspace}
+
+% By default LaTeX uses large margins.  This doesn't work well on exams; problems
+% end up in the "middle" of the page, reducing the amount of space for students
+% to work on them.
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate}
+\usepackage{hyperref}
+
+% fix clash between minted and exam
+\makeatletter
+\@namedef{ver@framed.sty}{9999/12/31}
+\@namedef{opt@framed.sty}{}
+\makeatother
+
+% python
+\usepackage{minted}
+
+% graphics
+\usepackage{graphicx}
+
+% Here's where you edit the Class, Exam, Date, etc.
+\newcommand{\class}{NPRE412}
+\newcommand{\term}{Spring 2025}
+\newcommand{\assignment}{HW 6}
+\newcommand{\duedate}{2025.03.04}
+%\newcommand{\timelimit}{50 Minutes}
+
+\newcommand{\nth}{n\ensuremath{^{\text{th}}} }
+\newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Macro}{\ensuremath{\Sigma}}
+\newcommand{\vOmega}{\ensuremath{\hat{\Omega}}}
+
+% For an exam, single spacing is most appropriate
+\singlespacing
+% \onehalfspacing
+% \doublespacing
+
+% For an exam, we generally want to turn off paragraph indentation
+\parindent 0ex
+
+%\unframedsolutions
+\usepackage{bibentry}
+\begin{document} 
+
+% These commands set up the running header on the top of the exam pages
+\pagestyle{head}
+\firstpageheader{}{}{}
+\runningheader{\class}{\assignment\ - Page \thepage\ of \numpages}{Due \duedate}
+\runningheadrule
+
+\class \hfill \term \\
+\assignment \hfill Due \duedate\\
+\rule[1ex]{\textwidth}{.1pt}
+%\hrulefill
+
+\newcommand{\checked}{I checked this answer with Mahmoud Eltawila and Nathan Glaser.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+        \item This work must be submitted online as a \texttt{.pdf} through Canvas.
+        \item Work completed with LaTeX or Jupyter earns 1 extra point. Submit 
+                source file (e.g. \texttt{.tex} or \texttt{.ipynb}) along with 
+                the \texttt{.pdf} file.
+        \item If this work is completed with the aid of a numerical program 
+                (such as Python, Wolfram Alpha, or MATLAB) all scripts and data 
+                must be submitted in addition to the \texttt{.pdf}.
+        \item If you work with anyone else, document what you worked on together.
+\end{itemize}
+\rule[1ex]{\textwidth}{.1pt}
+
+
+% ---------------------------------------------
+\begin{questions}
+        % ---------------------------------------------
+        \question[20] List and briefly describe three of the most common fuel 
+        failure modes.
+        \begin{solution}
+        From Table 4.6 on Pg. 108.
+
+                \begin{itemize}
+                        \item \textbf{Grid-to-Rod Fretting : } (PWR: 83\%, BWR: \~0\%) Grid-to-rod contact point being worn down (fretted) due to vibrating fuel rods hitting the spacer grid. The constant vibration damages both the fuel rod cladding and the spacer grid, which is almost only an issue for PWRs.
+                        \item \textbf{Crud/Corrosion : } (PWR: 2\%, BWR: 51\%) I will be using the book's description of {\it stress corrosion cracking (SCC)} to describe this failure mode. Corrosion will cause crud (chalk river unidentified deposit?) to form after damaging the target. Corrosion occurs when chemicals attack a metal under. For SCC, the chemical assailant attacks a metal under stress in the atmosphere of a corrosive environment.
+                        \item \textbf{Debris Fretting : } (PWR: 5\%, BWR: 20\%) Solid (mostly metal) objects circulate in the coolant and collide with fuel rod cladding. Debris fretting can be mitigated by filtering the coolant for solid matter.
+                \end{itemize}
+        \end{solution}
+
+        % ---------------------------------------------
+        \question[40] Calculate the cost of nuclear fuel fabricated and 
+        delivered on site using the following data (Tsoulfanidis 4.3):
+        \begin{itemize}
+                \item Cost of natural uranium $\frac{\$60}{lb_{U_3O_8}}$ 
+                \item enrichment 4.2\%
+                \item conversion $\frac{\$11.50}{kgU}$
+                \item tails 0.25\%
+                \item price per SWU \$110
+                \item conversion loss 0.6\%
+                \item fabrication transportation cost $\frac{\$230}{kgU}$
+                \item fabrication loss 0.7\%
+        \end{itemize}
+        \begin{solution}
+                The cost per kg of fabricated fuel was \$2375.35. I obtained this using equation 4.1 from our textbook. \checked
+
+                \begin{subequations}
+                    First, find the cost of yellowcake in \$ per kgU. Multiply the given cost by the mass ratio of $U_3O_8$ to $U_3$ and convert to kg.
+                    \begin{equation}
+                        PU = \frac{\$60}{lb \ U_3O_8} \cdot \frac{3 M_U + 8 M_O}{3 M_U} \cdot \frac{2.2046 lb}{kg} = \$ 155.99 \ per \ kgU 
+                    \end{equation}
+                    We will need the function for separation potentials. Here, $x$ is the U-235 enrichment.
+                    \begin{equation}
+                        V(x) = (2x - 1) \ln{\frac{x}{1 - x}}
+                    \end{equation}
+                    We also need the separation factor. $xf$, is the enrichment of the feed (natural U), $xp$ is the enrichment of the fabricated fuel, and $xw$ is the enrichment of the tails.
+                    \begin{equation}
+                        \frac{F}{P} = \frac{xp - xw}{xf - xw}
+                    \end{equation}
+                    \begin{equation}
+                        \frac{W}{P} = \frac{xp - xf}{xf - xw}
+                    \end{equation}
+                    \begin{equation}
+                        SF = V(xp) + \frac{W}{P} V(xw) - \frac{F}{P} V(xf)
+                    \end{equation}
+                    Finally, calculate $FF$ or the fuel fabrication cost. $PU$ was found earlier and all other costs and losses were given.
+                    \begin{equation}
+                        \label{eq:ff}
+                        FF = \left\{\frac{PU}{(1 - l_c)(1 - l_f)} + \frac{PC}{(1 - l_f)} \right\} \frac{F}{P} + \frac{PS}{(1 - l_f)} SF + PF
+                    \end{equation}
+                \end{subequations}
+
+        The code has been omitted from this section because it is long and I don't want you to have to scroll more. I included all the code at the end of question 3 because the code is identical for both questions. 
+        \end{solution}
+        % ---------------------------------------------
+        \question[40] If the enrichment changes by 0.4\% (i.e. goes from 4.2 to 
+        4.6\%) by what percentage does the cost of fuel in the previous problem 
+        (Tsoulfanidis 4.3) change?
+        \begin{solution}
+                The price difference is +10.08785\% with 4.6\% fuel compared to 4.2\% fuel. The cost of the 4.6\% fuel was \$2614.83 per kg.
+
+                \begin{subequations}
+                    Use \ref{eq:ff} to find the new cost for 4.6\% ($FF_2$) enriched fuel.
+                    \begin{equation}
+                        FF_2 = \left\{\frac{PU}{(1 - l_c)(1 - l_f)} + \frac{PC}{(1 - l_f)} \right\} \frac{F}{P}_2 + \frac{PS}{(1 - l_f)} SF_2 + PF = \$2614.83 \ per \ kg
+                    \end{equation}
+                    But $\frac{F}{P}$, $\frac{W}{P}$, and $SF$ change.
+                    \begin{equation}
+                        \frac{F}{P}_2 = \frac{(4.6e-2) - xw}{xf - xw}
+                    \end{equation}
+                    \begin{equation}
+                        \frac{W}{P}_2 = \frac{(4.6e-2) - xf}{xf - xw}
+                    \end{equation}
+                    \begin{equation}
+                        SF_2 = V(4.6e-2) + \frac{W}{P} V(xw) - \frac{F}{P} V(xf)
+                    \end{equation}
+                    With the different costs based on the the desired enrichments, we can find the percent difference.
+                    \begin{equation}
+                        \%_{diff} = 100 \cdot \frac{FF_2 - FF_1}{FF_1} = 10.08785\%
+                    \end{equation}
+                \end{subequations}
+
+\begin{minted}[mathescape,
+        numbersep=5pt,
+        gobble=0,
+        frame=lines,
+        framesep=2mm]{python}
+# data
+# costs
+c_yc = 60           # dollar per lb of yellow cake
+c_con = 11.5        # dollar per kgU
+c_swu = 110         # dollar per SWU
+c_ft = 230          # dollar per kg U to fabricate and transport
+
+# enrichments
+x_nu = 0.711 / 100  # enrichment of natural U
+x_en = 4.2 / 100    # enrichment of fuel
+x_tl = 0.25 / 100   # enrichments of tails
+
+# losses
+l_con = 0.6 / 100   # conversion loss
+l_fab = 0.7 / 100   # fabrication loss
+
+
+# formatting data
+m_o = openmc.data.atomic_weight('O')
+m_u = openmc.data.atomic_weight('U')
+
+m_yc = (3 * m_u) + (8 * m_o)
+m_ratio = (3 * m_u) / m_yc
+
+lb_per_kg = 2.2046
+c_yc *= lb_per_kg / m_ratio  # ($ per lb_yc) * (lb per kg) / (U per yc)
+\end{minted}
+
+\begin{minted}[mathescape,
+        numbersep=5pt,
+        gobble=0,
+        frame=lines,
+        framesep=2mm]{python}
+# functions
+def sep_pot(x):
+    """returns seperation potential for an enrichment x"""
+    return (2 * x - 1) * np.log(x / (1 - x))
+
+
+def sep_factor(xf=x_nu, xp=x_en, xw=x_tl):
+    """find the cost to enrich m [kg] of UF6"""
+    fop = (xp - xw) / (xf - xw)
+    wop = (xp - xf) / (xf - xw)
+
+    vp = sep_pot(xp)
+    vf = sep_pot(xf)
+    vw = sep_pot(xw)
+
+    return vp + (wop * vw) - (fop * vf)
+
+
+# functions
+def fuel_fab(xp=x_en, do_print=False):
+    """calculates fuel fabrication cost using Eq 4.1"""
+    # calcs
+    sf = sep_factor(xp=xp)
+    fop = (xp - x_tl) / (x_nu - x_tl)
+
+    # costs
+    c1 = ((c_yc / (1 - l_con) / (1 - l_fab)) + (c_con / (1 - l_fab))) * fop
+    c2 = (c_swu / (1 - l_fab)) * sf
+    c3 = c_ft
+
+    if do_print: print(f"{c1}\n{c2}\n{c3}")
+
+    return c1 + c2 + c3
+
+# question 2
+cost = fuel_fab(xp=x_en)
+print(f"FF w/ 4.2%: ${round(cost, 2)}/kg")
+
+# question 3
+c1 = fuel_fab(xp=x_en)
+c2 = fuel_fab(xp=(4.6 / 100))
+
+diff = (c2 - c1) / c1 * 100
+
+print(f"FF w/ 4.2%: ${round(c1, 2)}/kg")
+print(f"FF w/ 4.6%: ${round(c2, 2)}/kg")
+print(f"\nPercent Diff: {round(diff, 5)}%")
+\end{minted}
+        \end{solution}
+\end{questions}
+\end{document}
+
+
