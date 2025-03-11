@@ -1,0 +1,216 @@
+%        File: hw07_template.tex
+%     Created: Sat Sep 10 10:00 AM 2016 C
+% Last Change: Sat Sep 10 10:00 AM 2016 C
+%
+
+% use the answers clause to get answers to print; otherwise leave it out.
+\documentclass[11pt,answers,addpoints]{exam}
+%\documentclass[11pt]{exam}
+\RequirePackage{amssymb, amsfonts, amsmath, latexsym, verbatim, xspace, setspace}
+
+% By default LaTeX uses large margins.  This doesn't work well on exams; problems
+% end up in the "middle" of the page, reducing the amount of space for students
+% to work on them.
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate}
+\usepackage{minted}
+\usepackage{hyperref}
+
+% Here's where you edit the Class, Exam, Date, etc.
+\newcommand{\class}{NPRE412}
+\newcommand{\term}{Spring 2025}
+\newcommand{\assignment}{HW 7}
+\newcommand{\duedate}{2025.03.11}
+%\newcommand{\timelimit}{50 Minutes}
+
+
+\newcommand{\nth}{n\ensuremath{^{\text{th}}} }
+\newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Macro}{\ensuremath{\Sigma}}
+\newcommand{\vOmega}{\ensuremath{\hat{\Omega}}}
+
+% For an exam, single spacing is most appropriate
+\singlespacing
+% \onehalfspacing
+% \doublespacing
+
+% For an exam, we generally want to turn off paragraph indentation
+\parindent 0ex
+
+%\unframedsolutions
+\usepackage{bibentry}
+\begin{document} 
+
+
+% These commands set up the running header on the top of the exam pages
+\pagestyle{head}
+\firstpageheader{}{}{}
+\runningheader{\class}{\assignment\ - Page \thepage\ of \numpages}{Due \duedate}
+\runningheadrule
+
+\class \hfill \term \\
+\assignment \hfill Due \duedate\\
+\rule[1ex]{\textwidth}{.1pt}
+%\hrulefill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+        \item This work must be submitted online as a \texttt{.pdf} through Canvas.
+        \item Work completed with LaTeX or Jupyter earns 1 extra point. Submit 
+                source file (e.g. \texttt{.tex} or \texttt{.ipynb}) along with 
+                the \texttt{.pdf} file.
+        \item If this work is completed with the aid of a numerical program 
+                (such as Python, Wolfram Alpha, or MATLAB) all scripts and data 
+                must be submitted in addition to the \texttt{.pdf}.
+        \item If you work with anyone else, document what you worked on together.
+\end{itemize}
+\rule[1ex]{\textwidth}{.1pt}
+
+
+
+% ---------------------------------------------
+\begin{questions}
+        % intro
+        \question[30] Write explicitly the multigroup equations for the 
+        following conditions (Tsoulfanidis, 5.1):
+        \begin{itemize} 
+	\item four groups,
+        \item no upscattering,
+        \item fissions take place in the last two groups only,
+        \item fission neutrons appear in the first two groups only, 79\% of them in the 1st group
+\end{itemize}
+\begin{solution}
+
+\newcommand{\stream}[1]{- \nabla D_{#1}(r) \nabla \phi_{#1}(r)}
+\newcommand{\remove}[1]{\Sigma_{R,{#1}}(r) \phi_{#1}(r)}
+\newcommand{\scatter}[1]{\Sigma_{{g'} \neq {#1}}^G \Sigma_s^{{g'} \rightarrow {#1}}(r) \phi_{g'}(r)}
+\newcommand{\source}[1]{{#1} \Sigma_{g' = 1}^G \left(\nu \Sigma_f \right)_{g'} \phi_{g'}(r)}
+
+The general multi-group neutron diffusion equation is
+\begin{equation}
+    \stream{g} + \remove{g} = \scatter{g} + \source{\chi_{g}}
+\end{equation}
+
+You were right, I really do not like how he grouped fission. Using the ridiculous formulation from the textbook, the multi-group equations for the given conditions become:
+
+\begin{align*}
+\stream{1} + \remove{1} = \source{\left[ \chi_1 = 0.79 \right]}\\\\
+\stream{2} + \remove{2} = \scatter{2} + \source{\left[ \chi_2 = 0.21 \right]}\\\\
+\stream{3} + \remove{3} = \scatter{3}\\\\
+\stream{4} + \remove{4} = \scatter{4}
+\end{align*}
+\end{solution}
+
+        \question The two-group constants for a cylindrical
+homogeneous PWR follow. The reactor dimensions are H=3.2 m and R=1.5 m
+(Tsoulfanidis, 5.3).
+
+
+        \begin{center}
+        \begin{tabular}{lcc}
+                                \textbf{Constant} & \textbf{1}  & \textbf{2} \\
+                                \hline
+                                $\nu\Sigma_f$ & $0.0$ & $0.33$ \\
+                                $\chi$ & $1.0$ & $0.00$ \\
+                                $\Sigma_a$ & $0.012$ & $0.15$ \\
+                                $D$ & $1.25$ & $0.38$ \\
+                                $\Sigma_R$ & $0.035$ & $0.15$ \\
+                                $\sigma_{a,B}$ & $0.0$ & $2250b$ \\
+                                \hline
+        \end{tabular}
+        \end{center}
+
+        \begin{parts}
+                \part[20] Calculate  the value of k. 
+                \begin{solution} 
+The value of k is 1.42641. \\
+
+\begin{multiline}
+To solve this equation, use the cylinder buckling formula given in Table 5.1 in the textbook. Where $J_0$ is the 0th order term of the Bessel Function of the first kind.
+\begin{align*}
+    B^2 = \frac{\nu_0^2}{R^2} + \frac{\pi^2}{H^2}
+\end{align*}
+Next, use Eq. 5.42 in the textbook to find $k$. Also, cancel out the terms that are zero.
+\begin{align*}
+    k = \frac{\left( \nu\Sigma_f \right)_f}{\Sigma_{R,f} + D_{f}B^2} + 
+    \frac{ \Sigma_s^{1 \rightarrow 2} }{\Sigma_{R,f} + D_{f}B^2} + 
+    \frac{\left( \nu\Sigma_f \right)_{th}}{\Sigma_{a,th} + D_{th}B^2}\\
+    k = \frac{ \Sigma_s^{1 \rightarrow 2} }{\Sigma_{R,f} + D_{f}B^2} + 
+    \frac{\left( \nu\Sigma_f \right)_{th}}{\Sigma_{a,th} + D_{th}B^2}\\
+\end{align*}
+
+Plugging in the given values gives $k$ = 1.42641.
+
+\end{multiline}
+
+                \end{solution}
+                \part[20] Calculate  the boron concentration (in ppm) that will 
+                make the reactor exactly critical.
+                \begin{solution}
+For a critical system, you need 510.759 ppm of boron. I find it rather odd that ppm is based on the mass and not number. Checked with Mahmoud and Nathan. \\
+
+\begin{multiline}
+Modify the equation from part a to account for the number density of boron.
+\begin{equation}
+    k = \frac{ \Sigma_s^{1 \rightarrow 2} }{\Sigma_{R,f} + D_{f}B^2} + 
+    \frac{\left( \nu\Sigma_f \right)_{th}}{\left( \Sigma_{a,th} + N_B \sigma_{a,B} \right) + D_{th}B^2}
+\end{equation}
+Use a root finding to solve for the previous function minus 1 to find $N_B$ where $k=1$.
+\begin{equation}
+    N_B = 2.84531e19 \frac{g}{cc}
+\end{equation}
+Find the mass density of boron.
+\begin{equation}
+    \rho_B = \frac{N_B M_B}{N_A}
+\end{equation}
+Find ppm, strangely, by taking mass density ratio boron and water and multiplying by 1 million. Checked with Mahmoud and Nathan.
+\begin{equation}
+    ppm_B = 1e6 \cdot \frac{\rho_B}{\rho_w} = 510.759 \ ppm
+\end{equation}
+
+\end{multiline}
+                \end{solution}
+        \end{parts}
+
+        % ---------------------------------------------
+        \vspace*{2em}
+        % intro
+        \question[30] Neutron average cross sections in an eight-group structure 
+        are given below. Obtain cross sections for three groups, using the 
+	group fluxes and new (broad) group boundaries indicated in the table
+	(Tsoulfanidis, 5.5).
+
+        \begin{center}
+                        \begin{tabular}{lcccc}
+                                               & \textbf{Energy}  & \textbf{Cross} & & \textbf{Broad Group}\\
+                                               & \textbf{Upper} & \textbf{Section}  & \textbf{Flux} & \textbf{Energy Boundaries}\\
+                                 \textbf{Group}  & \textbf{[MeV]} & \textbf{[b]}  &        \textbf{[$\times10^{12}$]}       & \textbf{[MeV]}\\ 
+                                \hline
+                                               $1$      &    $10$      &    $1.5$      &    $1.3$      &    $10$      \\ 
+                                               $2$      &    $6$      &    $3.5$      &    $1.1$      &    \\ 
+                                               $3$      &    $1$      &    $6.0$      &    $1.2$      &    $1$      \\ 
+                                               $4$      &    $0.5$      &    $12.0$      &    $12.1$      &    \\ 
+                                               $5$      &    $0.25$      &    $12.0$      &    $15.0$      &    \\ 
+                                               $6$      &    $0.1$      &    $7.0$      &    $17.0$      &    $0.1$      \\ 
+                                               $7$      &    $0.05$      &    $45.0$      &    $20.0$      &    \\ 
+                                               $8$      &    $1.0\times10^{-7}$      &    $115.0$      &    $55.0$      &         \\ 
+                                               \multicolumn{5}{c}{Lowest Energy = $1.0\times10^{-8}$}\\
+                                \hline
+                        \end{tabular}
+        \end{center}
+\begin{solution}
+Using Eq 5.83 from the book, the broad group cross section is 2.528 b for G1, 11.387 b for G2, 27.541 b for G3. Checked with Mahmoud and Nathan.
+
+\begin{equation}
+    \sigma_g = \frac{\Sigma_h \sigma_h(r) \phi_h(r) (\Delta E)_h}{\Sigma_h \phi_h(r) (\Delta E)_h}
+\end{equation}
+Use the right bounds and you solve the problem.
+
+\end{solution}
+
+\end{questions}
+
+\end{document}
+
+
