@@ -1,0 +1,251 @@
+% use the answers clause to get answers to print; otherwise leave it out.
+\documentclass[11pt,answers,addpoints]{exam}
+\RequirePackage{amssymb, amsfonts, amsmath, latexsym, verbatim, xspace, setspace}
+
+% By default LaTeX uses large margins.  This doesn't work well on exams; problems
+% end up in the "middle" of the page, reducing the amount of space for students
+% to work on them.
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate}
+\usepackage{minted}
+\usepackage{hyperref}
+
+% Here's where you edit the Class, Exam, Date, etc.
+\newcommand{\class}{NPRE412}
+\newcommand{\term}{Spring 2025}
+\newcommand{\assignment}{HW 8}
+\newcommand{\duedate}{2025.03.25}
+%\newcommand{\timelimit}{50 Minutes}
+
+
+\newcommand{\nth}{n\ensuremath{^{\text{th}}} }
+\newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Macro}{\ensuremath{\Sigma}}
+\newcommand{\vOmega}{\ensuremath{\hat{\Omega}}}
+
+% For an exam, single spacing is most appropriate
+\singlespacing
+% \onehalfspacing
+% \doublespacing
+
+% For an exam, we generally want to turn off paragraph indentation
+\parindent 0ex
+
+%\unframedsolutions
+\usepackage{bibentry}
+\begin{document} 
+
+
+% These commands set up the running header on the top of the exam pages
+\pagestyle{head}
+\firstpageheader{}{}{}
+\runningheader{\class}{\assignment\ - Page \thepage\ of \numpages}{Due \duedate}
+\runningheadrule
+
+\class \hfill \term \\
+\assignment \hfill Due \duedate\\
+\rule[1ex]{\textwidth}{.1pt}
+%\hrulefill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+        \item Show your work.
+        \item This work must be submitted online as a \texttt{.pdf} through
+                Canvas.
+        \item Work completed with LaTeX or Jupyter earns 1 extra point. Submit
+                source file (e.g. \texttt{.tex} or \texttt{.ipynb}) along with
+                the \texttt{.pdf} file.
+        \item If this work is completed with the aid of a numerical program
+                (such as Python, Wolfram Alpha, or MATLAB) all scripts and data
+                must be submitted in addition to the \texttt{.pdf}.
+        \item If you work with anyone else, document what you worked on together.
+\end{itemize}
+\rule[1ex]{\textwidth}{.1pt}
+
+
+
+% ---------------------------------------------
+\begin{questions}
+        % intro
+        \question[20] Calculate the mass of $^{239}Pu$ produced in a reactor 
+        operating for a year with an average flux of $1.2\times 
+        10^{12}n/cm^2\cdot s$, loaded with 90 tons of uranium, enriched to 3 
+        wt\% in $^{235}U$. For cross sections, assume that for $^{238}U$, 
+        $\sigma_c=2.1b$, and $\sigma_a  = 2.3b$, and fo ${239}Pu$, 
+        $\sigma_a=600b$, and $T_{1/2} = 24400yr$. (Tsoulfanidis, 5.12)
+
+        \begin{solution}
+        After one year of operation, 6.24983 kg of Pu239 is produced. This assumes no Pu initially and N$_{U238}$ is constant. Checked with Ethan and Nathan. All Pu is 239 -- I am just being lazy.
+
+        Start by discretizing the time into N steps.
+        \begin{equation}
+            \Delta t = time / steps
+        \end{equation}
+        Do a finite differencing scheme using the following equation.
+        \begin{equation}
+            N_{Pu, i} = N_{Pu, i - i} + 
+            \Delta t \left( N_{U238} \sigma_{c,u}
+            - \lambda_{Pu} N_{Pu, i - 1}
+            - \sigma_{a,Pu} \phi N_{Pu, i - i} \right)
+        \end{equation}
+        For this finite differencing scheme, our "boundary condition" is there is no Pu at t$_i$ = 0. Then, convert into mass of Pu:
+        \begin{equation}
+            m_{Pu} = \frac{N_{Pu, t} M_{Pu}}{N_A}
+        \end{equation}
+
+        \end{solution}
+
+        % ---------------------------------------------
+        \question[15] Prove that if a utility pays 1mill/kWh(e) for disposal of 
+        used fuel, it is equivalent to \$253/kgU. Assume a burnup of 33,000 
+        MWd/t and an average thermal efficiency of 32\% (Tsoulfanidis, 6.1).
+        \begin{solution}
+        I checked with Nathan and Ethan.
+        
+        To prove, start by converting the disposal fee ($D$) into the appropriate units.
+        \begin{equation}
+            D \frac{mill}{kWh(e)} \cdot
+            1e-3 \frac{\$}{mill} \cdot
+            24 \frac{hr}{d} \cdot
+            1000 \frac{kW}{MW} \cdot
+            \eta \frac{MW_e}{MW_{th}} = 
+            D \frac{\$}{MWd}
+        \end{equation}
+        Convert the burnup to appropriate units as well.
+        \begin{equation}
+            BU \frac{MWd}{t} \cdot \frac{1 t}{1000 kg} = BU \frac{MWd}{kg}
+        \end{equation}
+        Multiply the two together.
+        \begin{equation}
+            P = BU \cdot D = 253.44 \frac{\$}{kg}
+        \end{equation}
+        \end{solution}
+
+        % ---------------------------------------------
+        \question[15] The initial enrichment of uranium in LWRs is 3\% and the 
+        final (at discharge after 3 years in the core) is 0.8\%. Based on these 
+        numbers, calculate the average neutron flux in an LWR (Tsoulfanidis, 
+        6.3).
+
+        \begin{solution}
+        The average flux is 1.938e13 $\frac{n^o}{cm^2s}$. Checked with Ethan and Nathan.
+
+        Start with the time rate of change equation for the number of U235 atoms (N). Note, $\sigma_a$ here is 400b.
+        \begin{equation}
+            \frac{dN}{dt} = \phi \sigma_{a} N
+        \end{equation}
+        Assume a discrete form.
+        \begin{equation}
+            \frac{\Delta N}{\Delta t} = \phi \sigma_{a} N_i
+        \end{equation}
+        \begin{equation}
+            \phi = \frac{\Delta N}{\Delta t \sigma_{a} N_i}
+        \end{equation}
+        Assume the enrichment (x) is proportional to the number of atoms.
+        \begin{equation}
+            \phi = \frac{\Delta x}{\Delta t \sigma_{a} x_i}
+        \end{equation}
+        \begin{equation}
+            \phi = \frac{x_i - x_f}{\Delta t \sigma_{a} x_i}
+        \end{equation}
+        \end{solution}
+
+
+        % ---------------------------------------------
+        \question[10] Is it possible for the availability and capacity factors to 
+        be equal? Explain your answer. Take into account the real operating 
+        conditions of the reactor (Tsoulfanidis, 6.7).
+        \begin{solution}
+        No. The availability factor is the fraction of time the plant capable of producing and power while the capacity factor is the equivalent fraction of time the plant spends at full power. In the real world, the plant has outages and shuts down occasionally. Therefore, the plant needs to ramp from no power to full power. During power ramping, the availability factor will be greater during ramping. Even if the plant never shuts down during its entire lifetime, the plant has to start and has to stop causing the availability factor to always be higher than the capacity factor.
+        \end{solution}
+
+        % ---------------------------------------------
+        \question A nuclear power plant uses 87 tons of uranium in its 
+        core. The first core consists of three equal batches with enrichments 
+        of 2.5\%, 2.9\%, and 3.1\%. For subsequent cycles, the reactor uses 
+        batches with enrichments equal to 2.6\% and 3.2\% in alternate years. 
+        One-third of the core is discharged each year and is replaced by new 
+        fuel. Assume a 30-year lifetime and 0.2\% tails during the life of the 
+        plant (Tsoulfanidis, 6.6a only). 
+
+        \begin{parts}
+                \part[10] The number of SWUs needed for the first core.
+        \begin{solution}
+        The plant needs 344 kSWU to start. Checked with Ethan and Nathan.
+
+        Use the equation for SWU.
+        \begin{equation}
+            SWU = (P \cdot V(P) + W \cdot V(W) - F \cdot V(F))
+        \end{equation}
+        Where V(i) is the separation potential of species i,
+        \begin{equation}
+            V(i) = (2x_i - 1) \ln(x_i / (1 - x_i))
+        \end{equation}
+        and P, F, and W are the masses of the product, feed, and waste, respectively.
+        \begin{align}
+            P = m \\ F = P \frac{x_P - x_W}{x_F - x_W} \\ W = P \frac{x_P - x_F}{x_F - x_W}
+        \end{align}
+        To find the SWU required, split the core into an even 3 batches (b) of 29,000 kg each. Assume a natural enrichment ($x_f$) of 0.71\% and a waste enrichment ($x_w$) of 0.2\%.
+        \begin{align}
+            SWU_{a,1} = SWU(x_F = 2.5\%) b = 93.778 kSWU \\
+            SWU_{a,2} = SWU(x_F = 2.9\%) b = 118.725 kSWU \\
+            SWU_{a,3} = SWU(x_F = 3.1\%) b = 131.43 kSWU \\ 
+            SWU_a = SWU_{a,1} + SWU_{a,2} + SWU_{a,3} = 343.934 kSWU
+        \end{align}
+        
+        \end{solution}
+        \part[5] The number of SWUs needed every year after the first cycle.
+        \begin{solution}
+        For odd years, 99.95 kSWU. For even years, 137.831 kSWU. Checked with Ethan and Nathan.
+        
+        Use the same equations as before.
+        \begin{align}
+            SWU_{b,odd} = SWU(x_F = 2.6\%) b = 99.95 kSWU \\
+            SWU_{b,even} = SWU(x_F = 3.2\%) b = 137.831 kSWU
+        \end{align}
+        \end{solution}
+        \part[5] The number of SWUs needed total over the life of the plant.
+\begin{solution}
+        Over the lifetime of the plant, 3.773 GSWU are required. Checked with Ethan and Nathan.
+
+        For a full lifetime, need 1 year of initial fuel, 15 odd years, 14 even years.
+        \begin{align}
+            SWU_c = SWU_a + 15 SWU_{b,odd} + 14 SWU_{b,even}
+        \end{align}
+\end{solution}
+
+        \end{parts}
+        
+        % ---------------------------------------------
+        \question A nuclear power plant operated for a year with a 69\% 
+        capacity factor (Tsoulfanidis, 6.8).
+        \begin{parts}
+                \part[10] What is the burnup of the fuel if the core contains 95 
+        tons of uranium and has been designed to produce 1200 MWe with a 32\% 
+        efficiency? 
+\begin{solution}
+        Burnup after 1 year is 9947.984 MWd/t. Checked with Ethan and Nathan.
+
+        \begin{equation}
+            BU = \frac{P}{\eta} \cdot cf \cdot \frac{365.24 d}{year} / m
+        \end{equation}
+\end{solution}
+                \part[10] What will be the average burnup, over the life of the 
+                plant, if $\frac{1}{3}$ of the core is replaced every year?  
+                Assume a 30-year life for the plant and a constant capacity 
+                factor and efficiency.
+
+\begin{solution}
+The average burnup is 14921.98 MWd/t.
+
+With N = 3.
+\begin{equation}
+    BU_f = \frac{2 N}{N + 1} BU_i
+\end{equation}
+\end{solution}
+        \end{parts}
+
+\end{questions}
+
+\end{document}
