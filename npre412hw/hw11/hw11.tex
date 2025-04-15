@@ -1,0 +1,201 @@
+%        File: hw11.tex
+%     Created: Sat Sep 10 10:00 AM 2016 C
+% Last Change: Sat Sep 10 10:00 AM 2016 C
+%
+
+% use the answers clause to get answers to print; otherwise leave it out.
+\documentclass[11pt,answers,addpoints]{exam}
+% \documentclass[11pt,addpoints]{exam}
+\RequirePackage{amssymb, amsfonts, amsmath, latexsym, verbatim, xspace, setspace}
+
+% By default LaTeX uses large margins.  This doesn't work well on exams; problems
+% end up in the "middle" of the page, reducing the amount of space for students
+% to work on them.
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate}
+\usepackage{minted}
+\usepackage{hyperref}
+
+% Here's where you edit the Class, Exam, Date, etc.
+\newcommand{\class}{NPRE412}
+\newcommand{\term}{Spring 2025}
+\newcommand{\assignment}{HW 11}
+\newcommand{\duedate}{2025.04.22}
+%\newcommand{\timelimit}{50 Minutes}
+
+\newcommand{\nth}{n\ensuremath{^{\text{th}}} }
+\newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Macro}{\ensuremath{\Sigma}}
+\newcommand{\vOmega}{\ensuremath{\hat{\Omega}}}
+
+% For an exam, single spacing is most appropriate
+\singlespacing
+% \onehalfspacing
+% \doublespacing
+
+% For an exam, we generally want to turn off paragraph indentation
+\parindent 0ex
+
+%\unframedsolutions
+\usepackage{bibentry}
+
+\usepackage{graphicx}
+\begin{document} 
+
+
+% These commands set up the running header on the top of the exam pages
+\pagestyle{head}
+\firstpageheader{}{}{}
+\runningheader{\class}{\assignment\ - Page \thepage\ of \numpages}{Due \duedate}
+\runningheadrule
+
+\class \hfill \term \\
+\assignment \hfill Due \duedate\\
+\rule[1ex]{\textwidth}{.1pt}
+%\hrulefill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+        \item Show your work.
+        \item This work must be submitted online as a \texttt{.pdf} through
+                Canvas.
+        \item Work completed with LaTeX or Jupyter earns 1 extra point. Submit
+                source file (e.g. \texttt{.tex} or \texttt{.ipynb}) along with
+                the \texttt{.pdf} file.
+        \item If this work is completed with the aid of a numerical program
+                (such as Python, Wolfram Alpha, or MATLAB) all scripts and data
+                must be submitted in addition to the \texttt{.pdf}.
+        \item If you work with anyone else, document what you worked on together.
+\end{itemize}
+\rule[1ex]{\textwidth}{.1pt}
+
+
+
+% ---------------------------------------------
+\begin{questions}
+        % ---------------------------------------------
+	\question[15] Which is more dangerous, 1g of $^{99}Tc$ or 1mg of
+	$^{137}Cs$? The Derived Air Concentrations (DAC) for these two isotopes
+        are $3\times 10^{-7} \left[\frac{\mu Ci}{cm^3}\right]$ and 
+        $6\times10^{-8} \left[\frac{\mu Ci}{cm^3}\right]$
+        respectively.
+
+        \begin{solution}
+            With these values, Cs more toxic and ~25 times more toxic than Tc. 
+            \begin{itemize}
+                \item Toxicity of Tc: 5.68e4 m$^3$
+                \item Toxicity of Cs: 1.44e6 m$^3$
+            \end{itemize}
+
+            Google the specific activities in $\mu Ci / g$
+            \begin{itemize}
+                \item $\mu$Ci-to-Bq = 37e3
+                \item SA$_{Tc}$ = 630e6 / \ $\mu$Ci-to-Bq  [uCi/g]
+                \item SA$_{Cs}$ = 3.2e12 / \ $\mu$Ci-to-Bq  [uCi/g]
+            \end{itemize}
+
+            Using Eq. 9.1, multiply the given masses by the specific activities and divide by the DAC in $\mu Ci/cc$.
+            \begin{equation}
+                Toxicity_i = \frac{A_i}{DAC_i} \frac{1 m^3}{1e6 \ cc}
+            \end{equation}      
+        \end{solution}
+
+        % ---------------------------------------------
+        \question Characterize the materials listed below as LLW, TRU, or HLW 
+        (Tsoulfanidis, Question 9.3):
+
+
+        \begin{parts}
+        \part[5] gloves contaminated with $^{60}Co$ and $10 Ci$ of fission products 
+        \begin{solution}
+                LLW
+        \end{solution}
+        \part[5] a fuel rod from a BWR after 100 MWd/t burnup
+        \begin{solution}
+                HLW
+        \end{solution}
+        \part[5] shoe covers sprayed with tritiated ($^3H_2O$)water
+        \begin{solution}
+                LLW
+        \end{solution}
+        \part[5] uranium mill tailings
+        \begin{solution}
+                trick question, millings have their own classification. If I had to choose one of these, I would choose TRU.
+        \end{solution}
+        \part[5] 5g of irradiated LWR fuel containing 550 nCi of $^{252}$Cf.
+        \begin{solution}
+                TRU
+        \end{solution}
+        \end{parts}
+
+        % ---------------------------------------------
+        \question Describe (in less than 10 words each) the main drawback of 
+        each of the following alternative spent nuclear fuel disposal 
+        locations:
+        \begin{parts}
+                \part[5] Space.
+        \begin{solution}
+                Space-crafts costs too much
+        \end{solution}
+                \part[5] Deep seabed.
+        \begin{solution}
+                Outlawed by Congress (MPRSA), not enough research
+        \end{solution}
+                \part[5] Polar Ice Sheets.
+        \begin{solution}
+                Limited retrivability, uncertainty in ice-cap movement
+        \end{solution}
+                \part[5] Surface of a remote island.
+        \begin{solution}
+                Unpredictable tropical weather, lack of infastructure, transportation costs, pirates
+        \end{solution}
+        \end{parts}
+
+        % ---------------------------------------------
+        \question 
+        In any generic mined geologic repository design, many engineered barriers defend 
+        against the release of spent nuclear fuel into the geologic host media. 
+        \begin{parts}
+                \part[5] Name three geologic host media that we discussed in class.
+        \begin{solution}
+                salt, tuff, granite
+        \end{solution}
+                \part[5] List as many layers of engineered barriers as you can.
+        \begin{solution}
+                drift wall, drip shield, glass/ceramic waste package, gamma shield (lead), impact limiter, neutron shield (concrete), shear pads, shield plug, closure lid
+        \end{solution}
+                \part[10] Draw a diagram and label the placement of these 
+                engineered and natural barriers together. 
+        \begin{solution}
+        
+                \includegraphics[width=\linewidth]{IMG_5289.jpg}
+        \end{solution}
+        \end{parts}
+        % ---------------------------------------------
+        \question[15] A power reactor operated for 300 effective full-power days 
+        (EFPD) at 1050 MW(e) with an efficiency of 33\%. What is the decay 
+        power generated in the core 20 min after shutdown? Assume only 235U 
+        fissions. (Tsoulfanidis, Question 9.6) (Hint: Use equation 9.9).
+        \begin{solution}
+                Power 20 min after shutdown is 54.13 MW$_{th}$. \\
+
+                Use Eq. 9.7 for the function $F(t, \infty)$
+                \begin{equation}
+                    F(t, \infty) = \sum_{i=1}^{23} \frac{\alpha_i}{\lambda_i} e^{-\lambda_i t} 
+                \end{equation}
+                Use Eq. 9.9 for the power as a function of time.
+                \begin{equation}
+                    P(t, T) = \frac{P_0}{Q} \left[ F(t, \infty) - F(t + T, \infty) \right]
+                \end{equation}
+                Using T = 300 days = 2.592e7 s, t = 20 min = 1200 s, P0 = 1050 MW$_{e}$ / 0.33, Q~=~203~MeV.
+        \end{solution}
+        \question[5] We talked in class about the reference man. Who is the 
+        reference man?
+        \begin{solution}
+                The reference man is the average man used in dosimitry and toxicity calculations. He is meant to be a good representation of the average person.
+        \end{solution}
+
+\end{questions}
+
+\end{document}

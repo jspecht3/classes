@@ -4,8 +4,8 @@
 %
 
 % use the answers clause to get answers to print; otherwise leave it out.
-\documentclass[11pt,answers,addpoints]{exam}
-%\documentclass[11pt,addpoints]{exam}
+%\documentclass[11pt,answers,addpoints]{exam}
+\documentclass[11pt,addpoints]{exam}
 \RequirePackage{amssymb, amsfonts, amsmath, latexsym, verbatim, xspace, setspace}
 
 % By default LaTeX uses large margins.  This doesn't work well on exams; problems
@@ -85,38 +85,15 @@
                 \item 0.8 Pu-$^{235}U$ equivalence.
         \end{itemize}
         \begin{solution}
-        For the given specifications, the fuel savings is 36.0\%.
-
-        
-        To solve, first calculate the feed factor w/ Eq. 3.6:
-        \begin{equation}
-            FF = \frac{x_p - x_w}{x_f - x_w}
-        \end{equation}
-        Then use Eq. 7.12 to find the percent savings.
-        \begin{equation}
-            savings = \frac{u \cdot s \cdot p}{x_p - x_w} + \frac{u \left(x_s - x_w \right)}{x_p - x_w} = 36.0\%
-        \end{equation}
+                solution here
         \end{solution}
         % ---------------------------------------------
         \question[50] What are the SWU savings for the for the conditions given 
         in the previous problem? (Tsoulfanidis, 7.4) 
         \begin{solution}
-        By recycling used nuclear fuel, we can save 19.475\% of the SWU used to fabricate the fuel from natural uranium.
+                solution here
 
-        To solve, use Eq 3.10 to find the separation potentials:
-        \begin{equation}
-            V(x) = (2 x - 1) \ln{\frac{x}{1 - x}}
-        \end{equation}
-        Then, find the SWU factor using Eq. 3.11:
-        \begin{equation}
-            SF = V(x_p) + \frac{W}{P} V(x_w) - \frac{f}{p} V(x_f)
-        \end{equation}
-        Finally, find the SWU saved using Eq. 7.16:
-        \begin{equation}
-            savings_{SWU} = \frac{u}{x_p - x_w} \left[
-            s \cdot p + (x_s + x_w) \left( 1 - \frac{SF_s}{SF} \right)
-            \right] = 19.475\%
-        \end{equation}
+
         \end{solution}
 
 \end{questions}

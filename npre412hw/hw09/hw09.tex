@@ -4,8 +4,8 @@
 %
 
 % use the answers clause to get answers to print; otherwise leave it out.
-\documentclass[11pt,answers,addpoints]{exam}
-%\documentclass[11pt,addpoints]{exam}
+%\documentclass[11pt,answers,addpoints]{exam}
+\documentclass[11pt,addpoints]{exam}
 \RequirePackage{amssymb, amsfonts, amsmath, latexsym, verbatim, xspace, setspace}
 
 % By default LaTeX uses large margins.  This doesn't work well on exams; problems
@@ -78,31 +78,13 @@
         Assume enrichment of fuel is $3.2\%$ and tails are equal to $0.28\%$ 
         (Tsoulfanidis, 7.1).
         \begin{solution}
-        The uranium utilization for LWRs is 0.815\% for the given specifications.
-
-        To solve, first calculate the feed factor:
-        \begin{equation}
-            FF = \frac{x_p - x_w}{x_f - x_w}
-        \end{equation}
-        Then, calculate the mass ratio of uranium after the cycle finishes to when you load the cycle as a function of burnup.
-        \begin{equation}
-            m_r = BU \cdot 1.23 \frac{g}{MWd} \cdot 1e-6 \frac{ton}{gram} = \frac{M_f}{M_l}
-        \end{equation}
-        Finally, calculate the utilization using Eq. 7.2:
-        \begin{equation}
-            u_{lwr} = \frac{m_r}{FF} = 0.815\%
-        \end{equation}
+                solution here
         \end{solution}
         % ---------------------------------------------
         \question[50] Repeat the previous problem for a breeder reactor. Assume 
         $\gamma = 0.02$ (Tsoulfanidis, 7.2).
         \begin{solution}
-        For a breeder reactor with the given specifications, the utilization is 74.55\%.
-
-        Using Eq. 7.3:
-        \begin{equation}
-            u_{breeder} = \frac{m_r}{m_r (1 - \gamma) + \gamma} = 74.55\%
-        \end{equation}
+                solution here
         \end{solution}
 
 \end{questions}
