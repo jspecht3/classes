@@ -1,0 +1,159 @@
+%        File: hw12.tex
+%     Created: Sat Sep 10 10:00 AM 2016 C
+% Last Change: Sat Sep 10 10:00 AM 2016 C
+%
+
+% use the answers clause to get answers to print; otherwise leave it out.
+\documentclass[11pt,answers,addpoints]{exam}
+%\documentclass[11pt,addpoints]{exam}
+\RequirePackage{amssymb, amsfonts, amsmath, latexsym, verbatim, xspace, setspace}
+
+% By default LaTeX uses large margins.  This doesn't work well on exams; problems
+% end up in the "middle" of the page, reducing the amount of space for students
+% to work on them.
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate}
+\usepackage{minted}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+
+% Here's where you edit the Class, Exam, Date, etc.
+\newcommand{\class}{NPRE412}
+\newcommand{\term}{Spring 2025}
+\newcommand{\assignment}{HW 12}
+\newcommand{\duedate}{2025.04.22}
+%\newcommand{\timelimit}{50 Minutes}
+
+\newcommand{\nth}{n\ensuremath{^{\text{th}}} }
+\newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Macro}{\ensuremath{\Sigma}}
+\newcommand{\vOmega}{\ensuremath{\hat{\Omega}}}
+
+% For an exam, single spacing is most appropriate
+\singlespacing
+% \onehalfspacing
+% \doublespacing
+
+% For an exam, we generally want to turn off paragraph indentation
+\parindent 0ex
+
+%\unframedsolutions
+\usepackage{bibentry}
+\begin{document} 
+
+
+% These commands set up the running header on the top of the exam pages
+\pagestyle{head}
+\firstpageheader{}{}{}
+\runningheader{\class}{\assignment\ - Page \thepage\ of \numpages}{Due \duedate}
+\runningheadrule
+
+\class \hfill \term \\
+\assignment \hfill Due \duedate\\
+\rule[1ex]{\textwidth}{.1pt}
+%\hrulefill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+        \item Show your work.
+        \item This work must be submitted online as a \texttt{.pdf} through
+                Canvas.
+        \item Work completed with LaTeX or Jupyter earns 1 extra point. Submit
+                source file (e.g. \texttt{.tex} or \texttt{.ipynb}) along with
+                the \texttt{.pdf} file.
+        \item If this work is completed with the aid of a numerical program
+                (such as Python, Wolfram Alpha, or MATLAB) all scripts and data
+                must be submitted in addition to the \texttt{.pdf}.
+        \item If you work with anyone else, document what you worked on together.
+\end{itemize}
+\rule[1ex]{\textwidth}{.1pt}
+
+
+
+% ---------------------------------------------
+\begin{questions}
+        % ---------------------------------------------
+        \question
+        An 1150-MW(e) LWR that operated for a year with the power history shown 
+        in the book. Assume a thermal efficiency of 32\%.  (Tsoulfanidis, Question 9.9).
+        \begin{parts}
+                \part[15] Calculate the decay power 1s after shutdown 
+                \textbf{using Eq. 9.5}.    
+        \begin{solution}
+                One second after shutdown, the predicted decay power was 205.559 MW.
+
+                First start by converting the electric power to thermal power.
+                \begin{equation}
+                    P_{0,th} = P_{0,e} / \eta
+                \end{equation}
+                Then, use equation 9.5 for each interval of the reactor operation.
+                \begin{equation}
+                    P(t, T, P_0) = P_0 \cdot \left(5.92e-2 * \left[ t^{-0.2} - (t + T)^{-0.2} \right] \right)
+                \end{equation}
+                The first interval is where $P_{0,1}$ is equal to $0.4 \cdot P_{0,th}$, $t_1$ is 1 second plus 7 months, and $T_1$ is 5 months.
+                \begin{equation}
+                    P(t_1, T_1, P_{0,1}) = 0.306 MW_{th}
+                \end{equation}
+                The second interval is where $P_{0,2}$ is equal to $P_{0,th}$, $t_2$ is 1 second, and $T_2$ is 7 months.
+                \begin{equation}
+                    P(t_2, T_2, P_{0,2}) = 205.252 MW_{th}
+                \end{equation}
+                Then, add the contributions together.
+                \begin{equation}
+                    P_t = P_1 + P_2 = 205.559 MW_{th}
+                \end{equation}
+        \end{solution}
+                
+                \part[15] Calculate the decay power 1s after shutdown 
+                \textbf{using the ANS-5.1 equations.} 
+        \begin{solution}
+                One second after shutdown, the predicted decay power was 215.898 MW.
+
+                Like the previous problem, find the decay heat from each of the intervals, but using Eq. 9.8 this time.
+                \begin{equation}
+                    P(t, T, P_0) = \frac{P_0}{Q} F(t, T)
+                \end{equation}
+                The first interval is where $P_{0,1}$ is equal to $0.4 \cdot P_{0,th}$, $t_1$ is 1 second plus 7 months, and $T_1$ is 5 months.
+                \begin{equation}
+                    P(t_1, T_1, P_{0,1}) = 0.243 MW_{th}
+                \end{equation}
+                The second interval is where $P_{0,2}$ is equal to $\cdot P_{0,th}$, $t_2$ is 1 second, and $T_2$ is 7 months.
+                \begin{equation}
+                    P(t_2, T_2, P_{0,2}) = 215.655 MW_{th}
+                \end{equation}
+                Then, add the two contributions together.
+                \begin{equation}
+                    P_t = P_1 + P_2 = 215.989 MW_{th}
+                \end{equation}
+                
+        \end{solution}
+                \part[10] Compare the results. 
+        \begin{solution}
+                The simplified equation from part a under-predicts the true power. I am assuming the equation from part a is more accurate. The ANS equation predicts a decay power 10.34 $MW_th$ higher than the simplified equation. This is 1.23\% of the total decay power. If the approximation over-predicted the decay power, it would be fine to use as it would be a conservative estimation. However, calamity may befall the earth if we use approximations that under-predict decay power in nuclear engineering.  
+        \end{solution}
+        \end{parts}
+
+
+        % ---------------------------------------------
+        \question[30] In High-Level Waste geologic repository concepts, should we be 
+        more concerned about high or low sorption elements? Why?
+
+        \begin{solution}
+        We are more concerned about low sorption elements because low sorption elements are not contained by the rock as they diffuse away from the waste storage. As these elements are not absorbed by the surrounding rock very well, their concentrations are "geometrically attenuated" by the host media very little.
+        \end{solution}
+
+        % ---------------------------------------------
+        \question[30] 
+        In High-Level Waste geologic repository concepts, should we be 
+        more concerned about high or low solubility elements? Why?
+
+        \begin{solution}
+        We are more concerned about high solubility elements because high solubility elements have an easier time shedding the confines we imposed upon them. These elements do not like being contained, and, as free-spirited elements, high solubility elements are more likely to leave containment.
+        \end{solution}
+
+
+\end{questions}
+
+\end{document}
