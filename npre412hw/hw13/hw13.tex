@@ -1,0 +1,237 @@
+%        File: hw13.tex
+%     Created: Sat Sep 10 10:00 AM 2016 C
+% Last Change: Sat Sep 10 10:00 AM 2016 C
+%
+
+% use the answers clause to get answers to print; otherwise leave it out.
+\documentclass[11pt,answers,addpoints]{exam}
+%\documentclass[11pt,addpoints]{exam}
+\RequirePackage{amssymb, amsfonts, amsmath, latexsym, verbatim, xspace, setspace}
+
+% By default LaTeX uses large margins.  This doesn't work well on exams; problems
+% end up in the "middle" of the page, reducing the amount of space for students
+% to work on them.
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate}
+\usepackage{minted}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+
+% Here's where you edit the Class, Exam, Date, etc.
+\newcommand{\class}{NPRE412}
+\newcommand{\term}{Spring 2025}
+\newcommand{\assignment}{HW 13}
+\newcommand{\duedate}{2025.05.29}
+%\newcommand{\timelimit}{50 Minutes}
+
+\newcommand{\nth}{n\ensuremath{^{\text{th}}} }
+\newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Macro}{\ensuremath{\Sigma}}
+\newcommand{\vOmega}{\ensuremath{\hat{\Omega}}}
+
+% For an exam, single spacing is most appropriate
+\singlespacing
+% \onehalfspacing
+% \doublespacing
+
+% For an exam, we generally want to turn off paragraph indentation
+\parindent 0ex
+
+%\unframedsolutions
+\usepackage{bibentry}
+\begin{document} 
+
+
+% These commands set up the running header on the top of the exam pages
+\pagestyle{head}
+\firstpageheader{}{}{}
+\runningheader{\class}{\assignment\ - Page \thepage\ of \numpages}{Due \duedate}
+\runningheadrule
+
+\class \hfill \term \\
+\assignment \hfill Due \duedate\\
+\rule[1ex]{\textwidth}{.1pt}
+%\hrulefill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+        \item Show your work.
+        \item This work must be submitted online as a \texttt{.pdf} through
+                Canvas.
+        \item Work completed with LaTeX or Jupyter earns 1 extra point. Submit
+                source file (e.g. \texttt{.tex} or \texttt{.ipynb}) along with
+                the \texttt{.pdf} file.
+        \item If this work is completed with the aid of a numerical program
+                (such as Python, Wolfram Alpha, or MATLAB) all scripts and data
+                must be submitted in addition to the \texttt{.pdf}.
+        \item If you work with anyone else, document what you worked on together.
+\end{itemize}
+\rule[1ex]{\textwidth}{.1pt}
+
+
+% ---------------------------------------------
+\begin{questions}
+        % ---------------------------------------------
+        \question In class, we discussed Megatons to Megawatts. The program 
+        claims that 500 tons of HEU (90\% enriched) was converted to 7 billion 
+        MWh.  
+        \begin{parts}
+                \part[10] Under the following assumptions, how many MWh would 
+                have been generated? (\textbf{you must show your work.})
+                \begin{itemize}
+                        \item depleted uranium for downblending was 0.2\% enriched
+			\item enrichment of LEU sent to U.S. 5\%
+			\item avg. U.S. capacity factor $90\%$
+                        \item avg. U.S. thermal efficiency $33\%$
+                        \item avg. U.S. burnup 50,000 MWd/MTIHM
+		\end{itemize}
+
+        \begin{solution}
+        Mahmoud and I got 3.70e9 MWh.
+
+        Use feed factor equation.
+        \begin{equation}
+            ff = \frac{x_p - x_w}{x_f - x_w}
+        \end{equation}
+        Divide mass (m) by feed factor to get the mass of fuel.
+        \begin{equation}
+            M = \frac{m}{ff}
+        \end{equation}
+        Find power.
+        \begin{equation}
+            P = M \cdot \eta \cdot BU \cdot 24\frac{hours}{day} = 3.7e9 \ MWh
+        \end{equation}
+        \end{solution}
+
+\part[20] Make some different \textbf{but still reasonable} assumptions that 
+will result in the claim made by the program (500 tons of 90\% enriched HEU 
+ultimately produced 7billion MWh). \textbf{List all assumptions} and 
+\textbf{show} that the resulting calculation now gives approximately 7billion 
+MWh generated. 
+        \begin{solution}
+        To get the values the government got, assume:
+        \begin{itemize}
+            \item the product enrichment is 3.5\%, the lower bound of LWR enrichment,
+            \item $\eta$ is 35.75\% as Rankine turbines have gotten better at extracting heat, and
+            \item BU is 60 because we got better at loading the cores.
+        \end{itemize}
+
+        Next, find the new feed factor
+        \begin{equation}
+            ff = \frac{x_p - x_w}{x_f - x_w} = 0.0367
+        \end{equation}
+        Find the new mass of the fuel.
+        \begin{equation}
+            M = \frac{m}{ff} = 1.36e7 \ kg
+        \end{equation}
+        Find new power
+        \begin{equation}
+            P = M \cdot \eta_2 \cdot BU_2 \cdot 24 \frac{hours}{day} = 7e9 MWh
+        \end{equation}
+        \end{solution}
+        \end{parts}
+        % ---------------------------------------------
+        \question[10] How many significant quantities are in 500 tons of 90\% 
+        enriched HEU?
+
+        \begin{solution}
+        Mahmoud and I got 18,000 significant quantities.
+
+        We know the significant quantity of direct use U-235 is 25 kg. Use this to find the number of significant quantities.
+        \begin{equation}
+            SQs = \frac{m \cdot x_f}{m_{sq}} = \frac{500e3 \ kg \cdot 0.9}{25 \ kg}
+        \end{equation}
+        \end{solution}
+
+        % ---------------------------------------------
+        \question[10] How many significant quantities are in 500 tons of natural 
+        thorium?
+
+        \begin{solution}
+        Mahmoud and I got 25 significant quantities.
+
+        We know the significant quantity of direct use U-235 is 25 kg. Use this to find the number of significant quantities.
+        \begin{equation}
+            SQs = \frac{m}{m_sq} = \frac{500e3 \ kg}{20e3 \ kg}
+        \end{equation}
+        \end{solution}
+
+       % ---------------------------------------------
+        \question You are an inspector at Natanz.
+
+        On February 1: 
+        \begin{itemize}
+        \item You concluded that there were 4 canisters on site containing 5\% 
+                enriched uranium.
+        \item They collectively hold 8.2kg of $^{235}U$.
+        \item You tag the canisters with tamper-resistant seals.
+        \end{itemize}
+
+        On March 1:
+        \begin{itemize}
+        \item You count 4 canisters. 
+        \item Three of the original 4 canisters are present and remain tagged. 
+        \item The missing one contained 1kg of $^{235}U$ (according to your records).
+        \item You are told that in February,  enriched uranium was created, 
+                resulting in 2kg $^{235}U$, placed in the new, untagged canister.
+        \item And, you are shown that the missing 1kg $^{235}U$ canister had been shipped to a reactor facility. 
+        \end{itemize}
+        \begin{parts}
+                \part[10] What is the book inventory?
+        \begin{solution}
+        The book inventory is 9.2 kg.
+
+        \begin{equation}
+            BI = PB + X - Y = 8.2 + 2 - 1 = 9.2 \ kg
+        \end{equation}
+        \end{solution}
+
+                \part[10] You take 10 readings of the mass of $^{235}U$ in 
+                the new canister. They give: 2.102, 2.015, 2.022, 1.998, 1.989, 
+                2.101, 2.077, 1.970, 1.92, 2.01. What is the mean of the MUF? 
+        \begin{solution}
+        The mean MUF is 0.0204 kg.
+
+        Find the means using numpy.
+        \begin{equation}
+            means = np.means(masses)
+        \end{equation}
+        Find the MUF.
+        \begin{equation}
+            MUF = means - 2 = 0.0204 = kg.
+        \end{equation}
+        \end{solution}
+
+                \part[10] What is $\sigma_{MUF}$?
+        \begin{solution}
+        The standard deviation is 0.055 kg. I just used numpy to find the standard deviation.
+
+        \end{solution}
+                \part[10] Has this inspection broken the three-sigma rule?
+        \begin{solution}
+        No. MUF is less than 3 $\sigma$. 
+
+        \begin{equation}
+        0.0204 \ kg < 0.166 \ kg
+        \end{equation}
+        \end{solution}
+
+                \part[10] If all following months have a MUF exactly like this, 
+                how many months until $MUF_c \ge 1 SQ$?
+        \begin{solution}
+        It would take 73,529.4 months to get a significant quantity.
+
+        For indirect use, enrichment below 20\%, the significant quantity is 75 kg. Use this to find the months required.
+        \begin{equation}
+            M = \frac{SQ_{U235}}{5e-2 \cdot MUF}
+        \end{equation}
+        \end{solution}
+
+        \end{parts}
+
+
+\end{questions}
+
+\end{document}
